@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Upload de Podcast</title>
+</head>
+<body>
+  <h1>Upload de Podcast (MP3)</h1>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+        {% for msg in messages %}
+          <li>{{ msg }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  <form method="post" enctype="multipart/form-data">
+    <label>Título: <input type="text" name="title"></label><br>
+    <label>Descrição:<br>
+      <textarea name="description" rows="4" cols="50"></textarea>
+    </label><br>
+    <label>Arquivo MP3: <input type="file" name="file" accept="audio/mpeg,.mp3"></label><br>
+    <button type="submit">Enviar</button>
+  </form>
+
+  {% if uploaded %}
+    <p>Arquivo enviado: <a href="{{ url_for('uploaded_file', filename=filename) }}">{{ filename }}</a></p>
+  {% endif %}
+</body>
+</html>
